@@ -5,32 +5,32 @@ ui_print("");
 ui_print("By NammIsADev");
 ui_print("");
 ui_print("Installing microG companion suite...");
-ui_print("This installer will install these package into your /system: Aurora Store, GMSCore, GSFProxy, DroidGuard, Dummy Store, FakeGApps (LSPosed required)");
+ui_print("This installer will install packages into /system or /system_root/system");
 ui_print("");
 ui_print("DO NOT FLASH THIS PACKAGE WHEN YOU ALREADY HAVE GOOGLE PLAY SERVICES!");
 
-# Detect system-as-root (SAR)
+# Mount system partition to /mnt for checking
 mount("ext4", "EMMC", "/dev/block/bootdevice/by-name/system", "/mnt");
 
-# SAR detection: /system/system exists SAR
 run_program("/sbin/sh", "-c", "if [ -d /mnt/system/system ]; then exit 0; else exit 1; fi");
 ifelse(
-  $?, 
-  # System-as-root
+  $?,
   (
     ui_print("Detected system-as-root (SAR) layout. Android 12+");
+    unmount("/mnt");
     mount("ext4", "EMMC", "/dev/block/bootdevice/by-name/system", "/system_root");
     package_extract_dir("system", "/system_root/system");
     set_perm_recursive(0, 0, 0755, 0644, "/system_root/system/priv-app");
     unmount("/system_root");
   ),
-  # Non-SAR
   (
     ui_print("Detected non-system-as-root layout, Android 11 or below.");
+    unmount("/mnt");
+    mount("ext4", "EMMC", "/dev/block/bootdevice/by-name/system", "/system");
     package_extract_dir("system", "/system");
     set_perm_recursive(0, 0, 0755, 0644, "/system/priv-app");
     unmount("/system");
   )
 );
 
-ui_print("Installation complete. Wipe your cache, and enjoy!");
+ui_print("Installation complete. Wipe cache and enjoy!");
