@@ -9,41 +9,31 @@ ui_print("This installer will install packages into /system or /system_root/syst
 ui_print("");
 ui_print("DO NOT FLASH THIS PACKAGE WHEN YOU ALREADY HAVE GOOGLE PLAY SERVICES!");
 
-# Find system partition device path dynamically
-set_system_dev = run_program("/sbin/sh", "-c", "readlink -f /dev/block/bootdevice/by-name/system || echo ''");
+# Mount system partition temporarily to /mnt
+mount("ext4", "EMMC", "/dev/block/bootdevice/by-name/system", "/mnt");
+
+# Check if SAR by testing existence of /mnt/system/system
+run_program("/sbin/sh", "-c", "if [ -d /mnt/system/system ]; then exit 0; else exit 1; fi");
 
 ifelse(
-  strcmp(set_system_dev, ""),
-  0,
+  $?,
+  # SAR detected
   (
-    ui_print("Error: system partition device not found.");
-    abort();
+    ui_print("Detected system-as-root (SAR) layout. Android 12+");
+    unmount("/mnt");
+    mount("ext4", "EMMC", "/dev/block/bootdevice/by-name/system", "/system_root");
+    package_extract_dir("system", "/system_root/system");
+    set_perm_recursive(0, 0, 0755, 0644, "/system_root/system/priv-app");
+    unmount("/system_root");
   ),
+  # Non-SAR detected
   (
-    # Mount to /mnt to check SAR
-    mount("ext4", "EMMC", set_system_dev, "/mnt");
-    
-    run_program("/sbin/sh", "-c", "if [ -d /mnt/system/system ]; then exit 0; else exit 1; fi");
-    
-    ifelse(
-      $?,
-      (
-        ui_print("Detected system-as-root (SAR) layout. Android 12+");
-        unmount("/mnt");
-        mount("ext4", "EMMC", set_system_dev, "/system_root");
-        package_extract_dir("system", "/system_root/system");
-        set_perm_recursive(0, 0, 0755, 0644, "/system_root/system/priv-app");
-        unmount("/system_root");
-      ),
-      (
-        ui_print("Detected non-system-as-root layout, Android 11 or below.");
-        unmount("/mnt");
-        mount("ext4", "EMMC", set_system_dev, "/system");
-        package_extract_dir("system", "/system");
-        set_perm_recursive(0, 0, 0755, 0644, "/system/priv-app");
-        unmount("/system");
-      )
-    );
+    ui_print("Detected non-system-as-root layout, Android 11 or below.");
+    unmount("/mnt");
+    mount("ext4", "EMMC", "/dev/block/bootdevice/by-name/system", "/system");
+    package_extract_dir("system", "/system");
+    set_perm_recursive(0, 0, 0755, 0644, "/system/priv-app");
+    unmount("/system");
   )
 );
 
