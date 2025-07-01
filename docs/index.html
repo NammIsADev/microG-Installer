@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>microG Installer</title>
+  <style>
+    :root {
+      --bg: #fff;
+      --fg: #222;
+      --code-bg: #f4f4f4;
+      --link: #0066cc;
+      --quote-bg: #fff4f4;
+      --quote-border: #f66;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #121212;
+        --fg: #eee;
+        --code-bg: #1f1f1f;
+        --link: #4da3ff;
+        --quote-bg: #2a1c1c;
+        --quote-border: #ff6666;
+      }
+    }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg);
+      border-bottom: 1px solid #ccc;
+      padding: 0.5rem 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .navbar img.logo {
+      height: 32px;
+    }
+
+    .github-link img {
+      height: 24px;
+      filter: invert(0);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .github-link img {
+        filter: invert(1);
+      }
+    }
+
+    main {
+      max-width: 760px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    h1, h2 {
+      text-align: center;
+      font-weight: normal;
+    }
+
+    code {
+      background: var(--code-bg);
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+
+    blockquote {
+      background: var(--quote-bg);
+      border-left: 4px solid var(--quote-border);
+      padding: 0.6em 1em;
+      margin: 1em 0;
+      font-style: italic;
+    }
+
+    a {
+      color: var(--link);
+      text-decoration: none;
+    }
+
+    ul, ol {
+      padding-left: 1.2em;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #ccc;
+      margin: 2rem 0;
+    }
+
+    em {
+      color: #888;
+    }
+
+    .badges {
+      text-align: center;
+      margin-top: -1rem;
+      margin-bottom: 2rem;
+    }
+
+    .badges img {
+      margin: 0 0.25em;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <img class="logo" src="https://raw.githubusercontent.com/NammIsADev/microG-Installer/main/logo-microG.png" alt="microG logo" />
+    <a class="github-link" href="https://github.com/NammIsADev/microG-Installer" target="_blank" title="GitHub Repository">
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/github.svg" alt="GitHub">
+    </a>
+  </div>
+
+  <main>
+    <h1>microG Installer</h1>
+
+    <div class="badges">
+      <a href="https://github.com/NammIsADev/microG-Installer/releases">
+        <img src="https://img.shields.io/github/v/release/NammIsADev/microG-Installer?color=blue&label=version&style=flat-square" alt="Release">
+      </a>
+      <a href="https://github.com/NammIsADev/microG-Installer/stargazers">
+        <img src="https://img.shields.io/github/stars/NammIsADev/microG-Installer?style=flat-square" alt="Stars">
+      </a>
+      <a href="https://github.com/NammIsADev/microG-Installer/blob/main/LICENSE">
+        <img src="https://img.shields.io/github/license/NammIsADev/microG-Installer?style=flat-square" alt="License">
+      </a>
+    </div>
+
+    <p>microG Installer is a minimal flashable installer for microG, designed for emui-based huawei devices and other android systems.</p>
+
+    <p><em>this flashable installer helps you install microG, GsfProxy, DroidGuard, Aurora Store, FakeGApps (LSPosed), and Companion (Dummy Store) to <code>/system</code></em></p>
+
+    <blockquote>
+      <strong>warning</strong><br>
+      do not flash over existing gms-based roms without removing <code>gmscore</code> and <code>phonesky</code> first<br>
+      backup all stuff in your device before installing this<br>
+      signature spoofing required for proper microg functionality (requires lsposed)
+    </blockquote>
+
+    <hr>
+
+    <h2>features</h2>
+    <ul>
+      <li>supports both sar and non-sar layouts</li>
+      <li>installs to <code>/system</code> or <code>/system_root/system</code></li>
+      <li>compatible with twrp 3.1+</li>
+      <li>clean installer logic with permission setting</li>
+    </ul>
+
+    <hr>
+
+    <h2>usage</h2>
+    <ol>
+      <li>choose the correct zip from <a href="https://github.com/NammIsADev/microG-Installer/releases">releases</a>:
+        <ul>
+          <li><code>microG-InstallerX.X-emuiX-hw-signed.zip</code> → emui-based huawei devices (emui 8/9+)</li>
+          <li><code>microG-InstallerX.X-NonSAR-Global-signed.zip</code> → legacy devices without a/b layout</li>
+          <li><code>microG-InstallerX.X-SAR-Global-signed.zip</code> → newer devices with a/b layout</li>
+          <li><code>microG-InstallerX.X-NonSAR-minimal-signed.zip</code> → legacy devices + minimal package</li>
+          <li><code>microG-InstallerX.X-SAR-minimal-signed.zip</code> → newer devices + minimal package</li>
+        </ul>
+      </li>
+      <li>reboot to twrp</li>
+      <li>flash the zip</li>
+      <li>wipe cache/dalvik <em>(optional but recommended)</em></li>
+      <li>reboot and enjoy</li>
+    </ol>
+
+    <p><strong>note:</strong> tested on emui 8.0 / 9.1 and android 8.1 / 9 gsi builds</p>
+
+    <hr>
+
+    <h2>credits</h2>
+    <p>based on the official <a href="https://github.com/microg">microg project</a></p>
+    <p>installer by <a href="https://github.com/NammIsADev">@nammisadev</a></p>
+  </main>
+
+</body>
+</html>
