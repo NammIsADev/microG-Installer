@@ -1,0 +1,25 @@
+Signature-Version: 1.0
+SHA1-Digest-Manifest: M/2YSLjF1nnlv9IPtGfAYYaxwCI=
+Created-By: 1.0 (Android SignApk)
+
+Name: META-INF/com/google/android/updater-script
+SHA1-Digest: ECzvhgZkeC3QtbOlSQopHJ6VRuE=
+
+Name: system/priv-app/GmsCore/GmsCore.apk
+SHA1-Digest: 4v58gjgvUaifBAyD/40qvC2beCU=
+
+Name: META-INF/com/google/android/update-binary
+SHA1-Digest: ZVIyyHJEqpksgm1Q/TTbLyaGuSI=
+
+Name: system/priv-app/AuroraStore/AuroraStore.apk
+SHA1-Digest: K6NqoEorKVmZtd/0ZquonHdGhMk=
+
+Name: system/priv-app/Phonesky/Phonesky.apk
+SHA1-Digest: VbqMCaupZVpy9kmc7eQZ/BN0mnw=
+
+Name: system/priv-app/DroidGuard/DroidGuard.apk
+SHA1-Digest: MQ1LHO+P5+2FxHiIrArvVVR1NBA=
+
+Name: system/priv-app/FakeGapps/FakeGapps.apk
+SHA1-Digest: KqJmcuFt6+u0R2JOIkNbUy0pJwE=
+
