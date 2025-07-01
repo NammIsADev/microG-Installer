@@ -3,6 +3,17 @@
 </p>
 
 <h1 align="center">microG Installer</h1>
+<p align="center">
+  <a href="https://github.com/NammIsADev/microG-Installer/releases">
+    <img src="https://img.shields.io/github/v/release/NammIsADev/microG-Installer?color=blue&label=version&style=flat-square" alt="release">
+  </a>
+  <a href="https://github.com/NammIsADev/microG-Installer/stargazers">
+    <img src="https://img.shields.io/github/stars/NammIsADev/microG-Installer?style=flat-square" alt="stars">
+  </a>
+  <a href="https://github.com/NammIsADev/microG-Installer/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/NammIsADev/microG-Installer?style=flat-square" alt="license">
+  </a>
+</p>
 
 microG Installer is a minimal flashable installer for microG, designed for emui-based huawei devices and other android systems.  
 
