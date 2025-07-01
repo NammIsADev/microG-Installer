@@ -10,7 +10,8 @@ microG Installer is a minimal flashable installer for microG, designed for emui-
 
 > [!WARNING]  
 > do not flash over existing gms-based roms without removing `gmscore` and `phonesky` first  
-> signature spoofing required for proper microg functionality (requires lposed)
+> backup all stuff in your device before installing this  
+> signature spoofing required for proper microg functionality (requires LSPosed)
 
 ---
 
